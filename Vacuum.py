@@ -20,6 +20,7 @@ class Vacuum():
         self.speed = [self.speedx, self.speedy]
         self.radius = self.rect.width/2
         self.place(pos)
+        self.didBounce = False
         
     def place(self, pos):
         self.rect.center = pos
@@ -45,6 +46,7 @@ class Vacuum():
     def update(self):
         self.move()
         self.animate()
+        self.didBounce = False
     
     def animate(self):
         if self.waitCount < self.waitMax:
@@ -64,8 +66,10 @@ class Vacuum():
     def collideWall(self, width, height):
         if self.rect.left < 0 or self.rect.right > width:
             self.speedx = 0
+            self.didBounce = True
         if self.rect.top < 0 or self.rect.bottom > height:
             self.speedy = 0
+            self.didBounce = True
             
     def collideBall(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
@@ -74,20 +78,24 @@ class Vacuum():
                     other.living = False
                     if self.rect.center[0] < other.rect.center[0]: #self left of other
                         if other.speedx < 0: #moving left
-                            other.speedx = -other.speedx
-                            other.didBounce = True
+                            if not other.didBounce:
+                                other.speedx = -other.speedx
+                                other.didBounce = True
                     if self.rect.center[0] > other.rect.center[0]: #self right of other
                         if other.speedx > 0: #moving right
-                            other.speedx = -other.speedx
-                            other.didBounce = True
+                            if not other.didBounce:
+                                other.speedx = -other.speedx
+                                other.didBounce = True
                     if self.rect.center[1] < other.rect.center[1]: #self above other
                         if other.speedy < 0: #moving up
-                            other.speedy = -other.speedy
-                            other.didBounce = True
+                            if not other.didBounce:
+                                other.speedy = -other.speedy
+                                other.didBounce = True
                     if self.rect.center[1] > other.rect.center[1]:#self below other
                         if other.speedy > 0: #moving down
-                            other.speedy = -other.speedy
-                            other.didBounce = True
+                            if not other.didBounce:
+                                other.speedy = -other.speedy
+                                other.didBounce = True
     
     def distanceToPoint(self, pt):
         x1 = self.rect.center[0]

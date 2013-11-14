@@ -18,12 +18,16 @@ bgRect = bgImage.get_rect()
 
 bgColor = r,g,b = 0,0,0
 
-vacuum = PlayerBall([""], [3,3], [50,50], [width/2,height/2])
+vacuum = Vacuum([""], [3,3], [50,50], [width/2,height/2])
 
-monSize = random.randint(25, 150)
-monsters = [monster("", 
+monSize = [50, 50]
+monsters = [monster("Resources/Monster/Blue.png",
+                    "Resources/Monster/Green.png",
+                    "Resources/Monster/Orange.png",
+                    "Resources/Monster/Pink.png",
+                    "Resources/Monster/Yellow.png",
               [random.randint(-5,5), random.randint(-5,5)], 
-              [bsize, bsize], 
+              [monSize, monSize], 
               [random.randint(75, width-75), random.randint(75, height-75)])]
               
 start = False
@@ -92,7 +96,7 @@ while True:
             level += 1
             for i in range(level):
                 print i
-                monSize = random.randint(25, 150)
+                monSize = [50, 50]
                 monsters += [Monster("rsc/enemy/ball.png", 
                               [random.randint(-5,5), random.randint(-5,5)], 
                               [monSize, monSize], 
