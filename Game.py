@@ -2,8 +2,8 @@ import pygame, sys, math, random
 
 pygame.init()
 
-from Ball import Ball
-from PlayerBall import PlayerBall
+from Monster import Monster
+from Vacuum import Vacuum
 
 clock = pygame.time.Clock()
 
@@ -13,15 +13,13 @@ size = width, height
 
 screen = pygame.display.set_mode(size)
 
-bgImage = pygame.image.load("")
-bgRect = bgImage.get_rect()
-
 bgColor = r,g,b = 0,0,0
 
-vacuum = Vacuum([""], [3,3], [50,50], [width/2,height/2])
+vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [50,50], [width/2,height/2])
 
 monSize = [50, 50]
 monsters = [monster("Resources/Monster/Blue.png",
+                    "Resources/Monster/Blue2.png",
                     "Resources/Monster/Green.png",
                     "Resources/Monster/Orange.png",
                     "Resources/Monster/Pink.png",
@@ -43,9 +41,7 @@ while True:
         screen.blit(bgImage, bgRect)
         pygame.display.flip()
         clock.tick(60)
-    
-    bgImage = pygame.image.load("")
-    
+
     level = 1
     
     while start:
@@ -97,7 +93,7 @@ while True:
             for i in range(level):
                 print i
                 monSize = [50, 50]
-                monsters += [Monster("rsc/enemy/ball.png", 
+                monsters += [Monster("Resources/Monster/Blue.png", 
                               [random.randint(-5,5), random.randint(-5,5)], 
                               [monSize, monSize], 
                               [random.randint(75, width-75), random.randint(75, height-75)])]
