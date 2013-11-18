@@ -15,17 +15,13 @@ screen = pygame.display.set_mode(size)
 
 bgColor = r,g,b = 0,0,0
 
+bgImage = pygame.image.load("Resources/Background/background.png")
+bgRect = bgImage.get_rect()
+
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [50,50], [width/2,height/2])
 
 monSize = [50, 50]
-monsters = [monster("Resources/Monster/Blue.png",
-                    "Resources/Monster/Blue2.png",
-                    "Resources/Monster/Green.png",
-                    "Resources/Monster/Orange.png",
-                    "Resources/Monster/Pink.png",
-                    "Resources/Monster/Yellow.png",
-              [random.randint(-5,5), random.randint(-5,5)], 
-              [monSize, monSize], 
+monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
               [random.randint(75, width-75), random.randint(75, height-75)])]
               
 start = False

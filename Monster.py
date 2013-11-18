@@ -1,9 +1,18 @@
-import pygame, sys, math
+import pygame, sys, math, random
 
 class Monster():
-    def __init__(self, image, speed = [2,2], size = [100,100], pos = (0,0)):
-        self.image = pygame.image.load(image)
-        self.image = pygame.transform.scale(self.image, size)
+    def __init__(self, speed = [2,2], pos = (0,0)):
+        imgs = ["Resources/Monster/Blue.png",
+                    "Resources/Monster/Blue2.png",
+                    "Resources/Monster/Green.png",
+                    "Resources/Monster/Orange.png",
+                    "Resources/Monster/Pink.png",
+                    "Resources/Monster/Yellow.png"]
+        self.image = pygame.image.load(imgs[random.randint(0, len(imgs)-1)])
+        self.rect = self.image.get_rect()
+        w = self.rect.width
+        h = self.rect.height
+        self.image = pygame.transform.scale(self.image,[int(w * .5), int(h * .5)])
         self.rect = self.image.get_rect()
         self.speedx = speed[0]
         self.speedy = speed[1]
