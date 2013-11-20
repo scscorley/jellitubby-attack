@@ -12,7 +12,7 @@ class Monster():
         self.rect = self.image.get_rect()
         w = self.rect.width
         h = self.rect.height
-        self.image = pygame.transform.scale(self.image,[int(w * .5), int(h * .5)])
+        self.image = pygame.transform.scale(self.image,[int(w * .25), int(h * .25)])
         self.rect = self.image.get_rect()
         self.speedx = speed[0]
         self.speedy = speed[1]
@@ -35,9 +35,13 @@ class Monster():
         
     def collideWall(self, width, height):
         if self.rect.left < 0 or self.rect.right > width:
-            self.speedx = -self.speedx
+            if not self.didBounce():
+                self.speedx = -self.speedx
+                self.didBounce = True
         if self.rect.top < 0 or self.rect.bottom > height:
-            self.speedy = -self.speedy
+            if not self.didBounce():
+                self.speedy = -self.speedy
+                self.didBounce = True
             
     def collideBall(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
