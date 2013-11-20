@@ -19,6 +19,8 @@ bgImage = pygame.image.load("Resources/Background/background.png")
 bgRect = bgImage.get_rect()
 
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [50,50], [width/2,height/2])
+bullets = []
+
 
 monSize = [50, 50]
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
@@ -62,6 +64,8 @@ while True:
                     ballp.direction("stop up")
                 if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     ballp.direction("stop down")
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print event.button
 
         for monster in monsters:
             monster.update()
