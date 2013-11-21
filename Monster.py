@@ -35,11 +35,11 @@ class Monster():
         
     def collideWall(self, width, height):
         if self.rect.left < 0 or self.rect.right > width:
-            if not self.didBounce():
+            if not self.didBounce:
                 self.speedx = -self.speedx
                 self.didBounce = True
         if self.rect.top < 0 or self.rect.bottom > height:
-            if not self.didBounce():
+            if not self.didBounce:
                 self.speedy = -self.speedy
                 self.didBounce = True
             

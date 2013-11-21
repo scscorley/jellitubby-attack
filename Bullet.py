@@ -1,13 +1,16 @@
 import pygame, sys, math
 
 class Bullet():
-	
-	
+	def __init__(self, speed = [4,4], pos = (0,0), image = "Resources/Bullet/knife.png"):
+		self.rect = self.image.get_rect()
+        self.place(pos)
+        self.living = True
+		
 	def direction(self):
-        pass
+		pass
 	
 	def update(self):
-        pass
+		pass
 	
 	def move(self):
 		self.speed = [self.speedx, self.speedy]
@@ -23,16 +26,16 @@ class Bullet():
 					bullet.living = False
 					
    
-   def collideWall(self, width, height):
+	def collideWall(self, width, height):
 		if self.rect.left < 0 or self.rect.right > width:
 			bullet.living = False
 		if self.rect.top < 0 or self.rect.bottom > height:
 			bullet.living = False
    
    
-   def place(self, pos):
+	def place(self, pos):
 		self.rect.center = pos
-        
+		
    
    
    
