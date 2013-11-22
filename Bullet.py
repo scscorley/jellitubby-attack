@@ -1,10 +1,11 @@
 import pygame, sys, math
 
 class Bullet():
-	def __init__(self, speed = [4,4], pos = (0,0), image = "Resources/Bullet/knife.png"):
+	def __init__(self, speed = [4,4], pos = (0,0), image = ("Resources/Bullet/knife.png")):
+		
 		self.rect = self.image.get_rect()
-        self.place(pos)
-        self.living = True
+		self.place(pos)
+		self.living = True
 		
 	def direction(self):
 		pass

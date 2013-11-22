@@ -21,7 +21,7 @@ bgRect = bgImage.get_rect()
 
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [50,50], [width/2,height/2])
 bullets = []
-
+bullet = Bullet()
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
 			  [random.randint(75, width-75), random.randint(75, height-75)])]
 			  
