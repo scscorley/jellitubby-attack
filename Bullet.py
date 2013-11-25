@@ -1,8 +1,8 @@
 import pygame, sys, math
 
 class Bullet():
-	def __init__(self, speed = [4,4], pos = (0,0), image = ("Resources/Bullet/knife.png")):
-		
+	def __init__(self, speed = [4,4], pos = (500,500), image = ("Resources/Bullet/knife.png")):
+		self.image = pygame.image.load(image)
 		self.rect = self.image.get_rect()
 		self.place(pos)
 		self.living = True
