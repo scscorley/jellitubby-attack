@@ -21,6 +21,7 @@ class Vacuum():
         self.radius = self.rect.width/2
         self.place(pos)
         self.didBounce = False
+        self.hit = 0
         
     def place(self, pos):
         self.rect.center = pos
@@ -47,6 +48,7 @@ class Vacuum():
         self.move()
         self.animate()
         self.didBounce = False
+        
     
     def animate(self):
         if self.waitCount < self.waitMax:
@@ -80,21 +82,27 @@ class Vacuum():
                             if not other.didBounce:
                                 other.speedx = -other.speedx
                                 other.didBounce = True
+                                self.hit += 1
                     if self.rect.center[0] > other.rect.center[0]: #self right of other
                         if other.speedx > 0: #moving right
                             if not other.didBounce:
                                 other.speedx = -other.speedx
                                 other.didBounce = True
+                                self.hit += 1
                     if self.rect.center[1] < other.rect.center[1]: #self above other
                         if other.speedy < 0: #moving up
                             if not other.didBounce:
                                 other.speedy = -other.speedy
                                 other.didBounce = True
+                                self.hit += 1
                     if self.rect.center[1] > other.rect.center[1]:#self below other
                         if other.speedy > 0: #moving down
                             if not other.didBounce:
                                 other.speedy = -other.speedy
                                 other.didBounce = True
+                                self.hit += 1
+                 
+                    
     
     def distanceToPoint(self, pt):
         x1 = self.rect.center[0]

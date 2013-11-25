@@ -5,7 +5,7 @@ pygame.init()
 from Monster import Monster
 from Vacuum import Vacuum
 from Bullet import Bullet
-
+from HealthBar import HB
 clock = pygame.time.Clock()
 
 width = 800
@@ -19,6 +19,7 @@ bgColor = r,g,b = 0,0,0
 bgImage = pygame.image.load("Resources/Background/background.png")
 bgRect = bgImage.get_rect()
 
+healthbar = HB()
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [50,50], [width/2,height/2])
 bullets = []
 bullet = Bullet()
@@ -104,6 +105,7 @@ while True:
 		screen.blit(bgImage, bgRect)
 		screen.blit(vacuum.image, vacuum.rect)
 		screen.blit(bullet.image, bullet.rect)
+		screen.blit(healthbar.image, healthbar.rect)
 		for monster in monsters:
 			screen.blit(monster.image, monster.rect)
 		pygame.display.flip()
