@@ -21,6 +21,7 @@ class Monster():
         self.place(pos)
         self.living = True
         self.didBounce = False
+        self.damage = 10
         
     def place(self, pos):
         self.rect.center = pos
