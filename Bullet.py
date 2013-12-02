@@ -1,5 +1,7 @@
 import pygame, sys, math
 
+from Vacuum import Vacuum
+
 class Bullet():
 	def __init__(self, speed = [4,4], pos = (500,500), image = ("Resources/Bullet/knife.png")):
 		self.image = pygame.image.load(image)
