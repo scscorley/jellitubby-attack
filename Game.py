@@ -8,15 +8,15 @@ from Bullet import Bullet
 from HealthBar import HB
 clock = pygame.time.Clock()
 
-width = 800
-height = 600
+width = 1100
+height = 700
 size = width, height
 
 screen = pygame.display.set_mode(size)
 
 bgColor = r,g,b = 0,0,0
 
-bgImage = pygame.image.load("Resources/Background/background.png")
+bgImage = pygame.image.load("Resources/Background/TOILET.png")
 bgRect = bgImage.get_rect()
 
 
@@ -103,7 +103,8 @@ while True:
                               [random.randint(-5,5), random.randint(-5,5)], 
                               [monSize, monSize], 
                               [random.randint(75, width-75), random.randint(75, height-75)])]
-                          
+        
+        screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(vacuum.image, vacuum.rect)
         screen.blit(bullet.image, bullet.rect)
