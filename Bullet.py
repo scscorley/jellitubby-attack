@@ -9,7 +9,7 @@ class Bullet():
 		self.living = True
 		
 	def direction(self):
-		pygame.mouse.get_pos() = (aimx, aimy)
+		pass
         
 	
 	def update(self):

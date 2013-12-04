@@ -22,11 +22,18 @@ class Vacuum():
         self.place(pos)
         self.didBounce = False
         self.health = 100
+        mousePos = pygame.mouse.get_pos()
+        angle = math.atan2(mousePos[1],mousePos[0])
+        rot_image = pygame.transform.rotate(self.images[self.frame], angle)
+        rot_rect = self.rect.copy()
+        rot_rect.center = rot_image.get_rect().center
+        rot_image = rot_image.subsurface(rot_rect).copy()
+        self.image = rot_image
         
     def place(self, pos):
         self.rect.center = pos
         
-    def move(self, dir):
+    def direction(self, dir):
         if dir == "right":
             self.speedx = self.maxSpeedx
         if dir == "stop right":
@@ -111,10 +118,3 @@ class Vacuum():
         y2 = pt[1]
         
         return math.sqrt(((x2-x1)**2)+((y2-y1)**2))
-    
-    def direction(self, angle)
-        rot_image = pygame.transform.rotate(self.originalImages[self.frame], angle)
-        rot_rect = self.rect.copy()
-        rot_rect.center = rot_image.get_rect().center
-        rot_image = rot_image.subsurface(rot_rect).copy()
-        self.image = rot_image
