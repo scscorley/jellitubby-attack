@@ -8,6 +8,11 @@ from Bullet import Bullet
 from HealthBar import HB
 clock = pygame.time.Clock()
 
+
+pygame.mixer.music.load('Resources\Sounds\Music\monster.mp3')
+pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
+pygame.mixer.music.play(-1)
+
 width = 1100
 height = 700
 size = width, height
