@@ -9,9 +9,9 @@ from HealthBar import HB
 clock = pygame.time.Clock()
 
 
-pygame.mixer.music.load('Resources\Sounds\Music\monster.mp3')
-pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.load('Resources\Sounds\Music\monster.mp3')
+#pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
+#pygame.mixer.music.play(-1)
 
 width = 1100
 height = 700
@@ -25,9 +25,10 @@ bgImage = pygame.image.load("Resources/Background/TOILET.png")
 bgRect = bgImage.get_rect()
 
 
-vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,50], [width/2,height/2])
+vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
 healthbar = HB(vacuum)
 bullets = [Bullet()]
+
 
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
               [random.randint(75, width-75), random.randint(75, height-75)])]
