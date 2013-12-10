@@ -29,6 +29,7 @@ class Vacuum():
         rot_rect.center = rot_image.get_rect().center
         rot_image = rot_image.subsurface(rot_rect).copy()
         self.image = rot_image
+        self.living= True
         
     def place(self, pos):
         self.rect.center = pos
@@ -54,6 +55,8 @@ class Vacuum():
     def update(self):
         self.move()
         self.animate()
+        if self.health <= 0:
+            self.living = False
         self.didBounce = False
         
     
