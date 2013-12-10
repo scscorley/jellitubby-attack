@@ -7,6 +7,7 @@ class Bullet():
 		self.image = pygame.image.load(image)
 		self.rect = self.image.get_rect()
 		self.living = True
+
 		
 	def direction(self):
 		pass

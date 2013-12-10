@@ -1,18 +1,20 @@
 import pygame, sys, math
 
 class Vacuum():
-    def __init__(self, images, speed = [2,2], size = [100,100], pos = (0,0)):
-        self.images = []
-        for image in images:
-            newimage = pygame.image.load(image)
-            newimage = pygame.transform.scale(newimage, size)
-            self.images += [newimage]
-        self.frame = 0
-        self.maxFrame = len(self.images)-1
-        self.waitCount = 0
-        self.waitMax = 10
-        self.image = self.images[self.frame]
-        self.rect = self.image.get_rect()
+    def __init__(self, image, speed = [2,2], size = [100,100], pos = (0,0)):
+#        self.images = []
+#        for image in images:
+#            newimage = pygame.image.load(image)
+#            newimage = pygame.transform.scale(newimage, size)
+#            self.images += [newimage]
+#        self.frame = 0
+#        self.maxFrame = len(self.images)-1
+#        self.waitCount = 0
+#        self.waitMax = 10
+#        self.image = self.images[self.frame]
+        self.baseImage = pygame.image.load("Resources/Player/Vacuum.png")
+        self.baseImage = pygame.transform.scale(self.baseImage, size)
+        self.rect = self.baseImage.get_rect()
         self.maxSpeedx = speed[0]
         self.maxSpeedy = speed[1]
         self.speedx = 0
@@ -23,8 +25,11 @@ class Vacuum():
         self.didBounce = False
         self.health = 100
         mousePos = pygame.mouse.get_pos()
-        angle = math.atan2(mousePos[1],mousePos[0])
-        rot_image = pygame.transform.rotate(self.images[self.frame], angle)
+        mousePosPlayerX = mousePos[0] - self.rect.center[0]
+        mousePosPlayerY = mousePos[1] - self.rect.center[1]
+        self.angle = ((math.atan2(mousePosPlayerY, mousePosPlayerX))/math.pi)*180
+        self.angle = -self.angle
+        rot_image = pygame.transform.rotate(self.baseImage, self.angle)
         rot_rect = self.rect.copy()
         rot_rect.center = rot_image.get_rect().center
         rot_image = rot_image.subsurface(rot_rect).copy()
@@ -54,22 +59,31 @@ class Vacuum():
     
     def update(self):
         self.move()
-        self.animate()
-        if self.health <= 0:
-            self.living = False
+        
+        mousePos = pygame.mouse.get_pos()
+        mousePosPlayerX = mousePos[0] - self.rect.center[0]
+        mousePosPlayerY = mousePos[1] - self.rect.center[1]
+        self.angle = ((math.atan2(mousePosPlayerY, mousePosPlayerX))/math.pi)*180
+        self.angle = -self.angle
+        rot_image = pygame.transform.rotate(self.baseImage, self.angle)
+        rot_rect = self.rect.copy()
+        rot_rect.center = rot_image.get_rect().center
+        rot_image = rot_image.subsurface(rot_rect).copy()
+        self.image = rot_image
+#        self.animate()
         self.didBounce = False
         
     
-    def animate(self):
-        if self.waitCount < self.waitMax:
-            self.waitCount += 1
-        else:
-            self.waitCount = 0
-            if self.frame < self.maxFrame:
-                self.frame += 1
-            else:
-                self.frame = 0
-            self.image = self.images[self.frame]
+#    def animate(self):
+#        if self.waitCount < self.waitMax:
+#            self.waitCount += 1
+#        else:
+#            self.waitCount = 0
+#            if self.frame < self.maxFrame:
+#                self.frame += 1
+#            else:
+#                self.frame = 0
+#            self.image = self.images[self.frame]
     
     def move(self):
         self.speed = [self.speedx, self.speedy]
