@@ -77,6 +77,8 @@ while True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					bullets += [Bullet()]
+		if vacuum.health <= 0:
+			vacuum.living == False
 	
 		while start and not vacuum.living:
 			for event in pygame.event.get():
