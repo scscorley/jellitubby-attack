@@ -21,7 +21,7 @@ screen = pygame.display.set_mode(size)
 
 bgColor = r,g,b = 0,0,0
 
-bgImage = pygame.image.load("Resources/Background/TOILET.png")
+bgImage = pygame.image.load("Resources/Background/TOILET1.png")
 bgRect = bgImage.get_rect()
 
 
@@ -124,7 +124,7 @@ while True:
 							  [monSize, monSize], 
 							  [random.randint(75, width-75), random.randint(75, height-75)])]
 		if vacuum.living == False:
-			bgImage = pygame.image.load("Resources/Background/gameover.jpg")
+			bgImage = pygame.image.load("Resources/Background/GameOver.png")
 			bgRect = bgImage.get_rect() 
 		
 		screen.fill(bgColor)
