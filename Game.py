@@ -62,8 +62,7 @@ while True:
 					vacuum.direction("up")
 				if event.key == pygame.K_s or event.key == pygame.K_DOWN:
 					vacuum.direction("down")
-				if event.key == pygame.K_RETURN:
-						sys.reset()
+				
 				
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
@@ -77,16 +76,14 @@ while True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					bullets += [Bullet()]
-		if vacuum.health <= 0:
-			vacuum.living == False
+		
 	
 		while start and not vacuum.living:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()
 				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_RETURN:
-						sys.reset()
+				
 			   
 
 		for monster in monsters:
