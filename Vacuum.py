@@ -2,16 +2,6 @@ import pygame, sys, math
 
 class Vacuum():
     def __init__(self, image, speed = [2,2], size = [100,100], pos = (0,0)):
-#        self.images = []
-#        for image in images:
-#            newimage = pygame.image.load(image)
-#            newimage = pygame.transform.scale(newimage, size)
-#            self.images += [newimage]
-#        self.frame = 0
-#        self.maxFrame = len(self.images)-1
-#        self.waitCount = 0
-#        self.waitMax = 10
-#        self.image = self.images[self.frame]
         self.baseImage = pygame.image.load("Resources/Player/Vacuum.png")
         self.baseImage = pygame.transform.scale(self.baseImage, size)
         self.rect = self.baseImage.get_rect()
@@ -32,8 +22,9 @@ class Vacuum():
         rot_image = pygame.transform.rotate(self.baseImage, self.angle)
         rot_rect = self.rect.copy()
         rot_rect.center = rot_image.get_rect().center
-        rot_image = rot_image.subsurface(rot_rect).copy()
+        rot_image = rot_image.subsurface(rot_rect)
         self.image = rot_image
+        #self.image = self.baseImage
         self.living= True
         
     def place(self, pos):
@@ -70,23 +61,10 @@ class Vacuum():
         rot_image = pygame.transform.rotate(self.baseImage, self.angle)
         rot_rect = self.rect.copy()
         rot_rect.center = rot_image.get_rect().center
-        rot_image = rot_image.subsurface(rot_rect).copy()
+        rot_image = rot_image.subsurface(rot_rect)
         self.image = rot_image
-#        self.animate()
         self.didBounce = False
         
-    
-#    def animate(self):
-#        if self.waitCount < self.waitMax:
-#            self.waitCount += 1
-#        else:
-#            self.waitCount = 0
-#            if self.frame < self.maxFrame:
-#                self.frame += 1
-#            else:
-#                self.frame = 0
-#            self.image = self.images[self.frame]
-    
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed)
