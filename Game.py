@@ -21,8 +21,7 @@ screen = pygame.display.set_mode(size)
 
 bgColor = r,g,b = 0,0,0
 
-bgImage = pygame.image.load("Resources/Background/TOILET1.png")
-bgRect = bgImage.get_rect()
+
 
 
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
@@ -48,6 +47,8 @@ while True:
         clock.tick(60)
 
     level = 1
+    bgImage = pygame.image.load("Resources/Background/TOILET1.png")
+    bgRect = bgImage.get_rect()
     
     while start and vacuum.living:
         for event in pygame.event.get():
@@ -76,14 +77,6 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     bullets += [Bullet()]
-        
-    
-        while start and not vacuum.living:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    pass
                
 
         for monster in monsters:
@@ -120,9 +113,6 @@ while True:
                               [random.randint(-5,5), random.randint(-5,5)], 
                               [monSize, monSize], 
                               [random.randint(75, width-75), random.randint(75, height-75)])]
-        if vacuum.living == False:
-            bgImage = pygame.image.load("Resources/Background/GameOver.png")
-            bgRect = bgImage.get_rect() 
         
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
@@ -131,5 +121,27 @@ while True:
         screen.blit(healthbar.image, healthbar.rect)
         for monster in monsters:
             screen.blit(monster.image, monster.rect)
+        pygame.display.flip()
+        clock.tick(60)
+        
+    
+    bgImage = pygame.image.load("Resources/Background/GameOver.png")
+    bgRect = bgImage.get_rect() 
+    
+    while start and not vacuum.living:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    start = True
+                    vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
+                    healthbar = HB(vacuum)
+                    bullets = []
+                    monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
+                                [random.randint(75, width-75), random.randint(75, height-75)])]
+                    
+        screen.fill(bgColor)
+        screen.blit(bgImage, bgRect)
         pygame.display.flip()
         clock.tick(60)

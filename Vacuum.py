@@ -50,7 +50,7 @@ class Vacuum():
     
     def update(self):
         self.move()
-        if self.living <= 0:
+        if self.health <= 0:
             self.living = False
         
         mousePos = pygame.mouse.get_pos()
