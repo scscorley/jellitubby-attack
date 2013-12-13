@@ -101,26 +101,21 @@ class Vacuum():
                             if not other.didBounce:
                                 other.speedx = -other.speedx
                                 other.didBounce = True
-                                self.health -= other.damage
-                                
                     if self.rect.center[0] > other.rect.center[0]: #self right of other
                         if other.speedx > 0: #moving right
                             if not other.didBounce:
                                 other.speedx = -other.speedx
                                 other.didBounce = True
-                                self.health -= other.damage
                     if self.rect.center[1] < other.rect.center[1]: #self above other
                         if other.speedy < 0: #moving up
                             if not other.didBounce:
                                 other.speedy = -other.speedy
                                 other.didBounce = True
-                                self.health -= other.damage
                     if self.rect.center[1] > other.rect.center[1]:#self below other
                         if other.speedy > 0: #moving down
                             if not other.didBounce:
                                 other.speedy = -other.speedy
                                 other.didBounce = True
-                                self.health -= other.damage
                  
                     
     
