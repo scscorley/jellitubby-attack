@@ -87,6 +87,7 @@ class Vacuum():
                                 other.speedx = -other.speedx
                                 other.didBounce = True
                                 self.health -= other.damage
+                                
                     if self.rect.center[0] > other.rect.center[0]: #self right of other
                         if other.speedx > 0: #moving right
                             if not other.didBounce:
