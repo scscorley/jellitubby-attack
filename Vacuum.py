@@ -26,6 +26,9 @@ class Vacuum():
         self.image = rot_image
         #self.image = self.baseImage
         self.living= True
+        self.invincible = False
+        self.invincibleTimerMax = 30
+        self.invincibleTimer = self.invincibleTimerMax
         
     def place(self, pos):
         self.rect.center = pos
@@ -52,6 +55,14 @@ class Vacuum():
         self.move()
         if self.health <= 0:
             self.living = False
+        
+        if self.invincible:
+            print "I'm invincible!"
+            if self.invincibleTimer > 0:
+                self.invincibleTimer -= 1
+            else:
+                self.invincible = False
+                self.invincibleTimer = self.invincibleTimerMax
         
         mousePos = pygame.mouse.get_pos()
         mousePosPlayerX = mousePos[0] - self.rect.center[0]
@@ -81,30 +92,26 @@ class Vacuum():
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
             if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
                 if self.radius + other.radius > self.distanceToPoint(other.rect.center):
+                    if not self.invincible:
+                        self.health -= other.damage
+                        self.invincible = True
+                    
                     if self.rect.center[0] < other.rect.center[0]: #self left of other
                         if other.speedx < 0: #moving left
                             if not other.didBounce:
-                                other.speedx = -other.speedx
-                                other.didBounce = True
-                                self.health -= other.damage
+                                other.speedx = -other.speedx    
                     if self.rect.center[0] > other.rect.center[0]: #self right of other
                         if other.speedx > 0: #moving right
                             if not other.didBounce:
                                 other.speedx = -other.speedx
-                                other.didBounce = True
-                                self.health -= other.damage
                     if self.rect.center[1] < other.rect.center[1]: #self above other
                         if other.speedy < 0: #moving up
                             if not other.didBounce:
                                 other.speedy = -other.speedy
-                                other.didBounce = True
-                                self.health -= other.damage
                     if self.rect.center[1] > other.rect.center[1]:#self below other
                         if other.speedy > 0: #moving down
                             if not other.didBounce:
                                 other.speedy = -other.speedy
-                                other.didBounce = True
-                                self.health -= other.damage
                  
                     
     
