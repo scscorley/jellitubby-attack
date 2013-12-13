@@ -16,6 +16,7 @@ pygame.mixer.music.play(-1)
 width = 1100
 height = 700
 size = width, height
+KILLS = 0
 
 screen = pygame.display.set_mode(size)
 
@@ -128,7 +129,6 @@ while True:
 	bgImage = pygame.image.load("Resources/Background/GameOver.png")
 	bgRect = bgImage.get_rect() 
 	
-	
 	while start and not vacuum.living:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -146,3 +146,19 @@ while True:
 		screen.blit(bgImage, bgRect)
 		pygame.display.flip()
 		clock.tick(60)
+
+#class Kills(pygame.sprite.Sprite):
+	#def __init__(self):
+		#pygame.sprite.Sprite.__init__(self)
+		#self.font = pygame.font.Font(None, 20)
+		#self.font.set_italic(1)
+		#self.color = Color('white')
+		#self.lastscore = -1
+		#self.update()
+		#self.rect = self.image.get_rect().move(10, 450)
+
+	#def update(self):
+		#if KILLS != self.lastscore:
+			#self.lastscore = KILLS
+			#msg = "Kills: %d" % KILLS
+			#self.image = self.font.render(msg, 0, self.color)

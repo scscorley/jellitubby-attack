@@ -2,6 +2,7 @@ import pygame, sys, math
 
 from Vacuum import Vacuum
 
+
 class Bullet():
 	def __init__(self, speed = [4,4], pos = [500, 500], image = ("Resources/Bullet/knife.png")):
 		self.image = pygame.image.load(image)
@@ -11,7 +12,7 @@ class Bullet():
 		
 	def direction(self):
 		pass
-        
+		
 	
 	def update(self):
 		pass
@@ -28,6 +29,7 @@ class Bullet():
 				if self.radius + other.radius > self.distanceToPoint(other.rect.center):
 					other.living = False
 					bullet.living = False
+					KILLS = KILLS + 1
 					
    
 	def collideWall(self, width, height):
