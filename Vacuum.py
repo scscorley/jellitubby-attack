@@ -56,7 +56,7 @@ class Vacuum():
             self.living = False
         
         if self.invincible:
-            print "I'm invincible!"
+           
             if self.invincibleTimer > 0:
                 self.invincibleTimer -= 1
             else:

@@ -10,6 +10,7 @@ class Bullet():
         self.speedy = -math.sin(math.radians(self.angle))*10
         print self.angle, self.speedx, self.speedy
         self.place(pos)
+        radius = self.rect.height/2
     
     def update(self):
         self.move()
