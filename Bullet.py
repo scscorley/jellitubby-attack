@@ -1,49 +1,41 @@
 import pygame, sys, math
 
-from Vacuum import Vacuum
-
-
 class Bullet():
-	def __init__(self, speed = [4,4], pos = [500, 500], image = ("Resources/Bullet/knife.png")):
-		self.image = pygame.image.load(image)
-		self.rect = self.image.get_rect()
-		self.living = True
-
-		
-	def direction(self):
-		pass
-		
-	
-	def update(self):
-		pass
-	
-	def move(self):
-		self.speed = [self.speedx, self.speedy]
-		self.rect = self.rect.move(self.speed)
-		
-	
-	
-	def collideBall(self, other):
-		if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
-			if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
-				if self.radius + other.radius > self.distanceToPoint(other.rect.center):
-					other.living = False
-					bullet.living = False
-					KILLS = KILLS + 1
-					
+    def __init__(self, pos, angle):
+        self.image = pygame.image.load("Resources/Bullet/knife.png")
+        self.rect = self.image.get_rect()
+        self.living = True
+        self.angle = angle
+        self.speedx = math.cos(math.radians(self.angle))*10
+        self.speedy = -math.sin(math.radians(self.angle))*10
+        print self.angle, self.speedx, self.speedy
+        self.place(pos)
+    
+    def update(self):
+        self.move()
+    
+    def move(self):
+        self.speed = [self.speedx, self.speedy]
+        self.rect = self.rect.move(self.speed)
+    
+    def collideBall(self, other):
+        if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
+            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
+                if self.radius + other.radius > self.distanceToPoint(other.rect.center):
+                    other.living = False
+                    self.living = False
+                    
+    def collideWall(self, width, height):
+        if self.rect.left < 0 or self.rect.right > width:
+            self.living = False
+        if self.rect.top < 0 or self.rect.bottom > height:
+            self.living = False
    
-	def collideWall(self, width, height):
-		if self.rect.left < 0 or self.rect.right > width:
-			self.living = False
-		if self.rect.top < 0 or self.rect.bottom > height:
-			self.living = False
-   
-   
-	def place(self, pos):
-		self.rect.center = pos
-		
+    def place(self, pos):
+        self.rect.center = pos
+        
    
    
    
    
-	
+    

@@ -84,6 +84,7 @@ class Monster():
                             if not self.didBounce:
                                 other.speedy = -other.speedy
                                 self.didBounce = True
+                                
     def collideBullet(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
             if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:

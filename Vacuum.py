@@ -24,7 +24,6 @@ class Vacuum():
         rot_rect.center = rot_image.get_rect().center
         rot_image = rot_image.subsurface(rot_rect)
         self.image = rot_image
-        #self.image = self.baseImage
         self.living= True
         self.invincible = False
         self.invincibleTimerMax = 30

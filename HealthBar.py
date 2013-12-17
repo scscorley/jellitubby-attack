@@ -18,7 +18,6 @@ class HB():
 		
 		
 	def update(self):
-		print self.owner.health
 		life = int(math.ceil(self.owner.health/10.0)*10)
 		if life <= 0:
 			life = 0
