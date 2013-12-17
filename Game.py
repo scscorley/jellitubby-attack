@@ -97,6 +97,9 @@ while True:
         for monster in monsters:
             vacuum.collideBall(monster)
             
+        for bullet in bullets:
+            bullet.collideBall(monster)
+            
         for monster in monsters:
             if not monster.living:
                 monsters.remove(monster)
