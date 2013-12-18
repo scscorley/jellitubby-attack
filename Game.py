@@ -100,6 +100,7 @@ while True:
         for bullet in bullets:
             for monster in monsters:
                 bullet.collideBall(monster)
+                
             
         for monster in monsters:
             if not monster.living:
@@ -107,6 +108,9 @@ while True:
         
         for bullet in bullets:
             bullet.update()
+            bullet.collideWall(width,height)
+            if not bullet.living:
+                bullets.remove(bullet)
                 
         
         if len(monsters) == 0:
@@ -129,7 +133,7 @@ while True:
             screen.blit(monster.image, monster.rect)
         pygame.display.flip()
         clock.tick(60)
-        print len(bullets)
+        #print len(bullets)
         
     
     bgImage = pygame.image.load("Resources/Background/GameOver.png")
