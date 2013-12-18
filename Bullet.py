@@ -8,13 +8,15 @@ class Bullet():
         self.angle = angle
         self.speedx = math.cos(math.radians(self.angle))*10
         self.speedy = -math.sin(math.radians(self.angle))*10
-        rot_image = pygame.transform.rotate(self.image, self.angle)
+        self.rot_angle = self.angle - 90
+        rot_image = pygame.transform.rotate(self.image, self.rot_angle)
         rot_rect = self.rect.copy()
         rot_rect.center = rot_image.get_rect().center
         rot_image = rot_image.subsurface(rot_rect)
         self.image = rot_image
         self.place(pos)
         self.radius = self.rect.height/2
+        print self.angle
     
     def update(self):
         self.move()
