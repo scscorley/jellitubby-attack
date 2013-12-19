@@ -16,7 +16,6 @@ class Bullet():
         self.image = rot_image
         self.place(pos)
         self.radius = self.rect.height/2
-        print self.angle
     
     def update(self):
         self.move()
