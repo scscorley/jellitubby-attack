@@ -43,6 +43,10 @@ class Monster():
             if not self.didBounce:
                 self.speedy = -self.speedy
                 self.didBounce = True
+        if self.rect.center[0] < 0 or self.rect.center[0] > width:
+            self.living = False
+        if self.rect.center[1] < 0 or self.rect.center[1] > height:
+            self.living = False
             
     def collideBall(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
