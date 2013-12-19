@@ -115,10 +115,8 @@ while True:
         if len(monsters) == 0:
             level += 1
             for i in range(level):
-                monSize = [50, 50]
                 monsters += [Monster( 
                               [random.randint(-5,5), random.randint(-5,5)], 
-                               
                               [random.randint(75, width-75), random.randint(75, height-75)])]
         
         screen.fill(bgColor)
@@ -131,7 +129,6 @@ while True:
             screen.blit(monster.image, monster.rect)
         pygame.display.flip()
         clock.tick(60)
-        
     
     bgImage = pygame.image.load("Resources/Background/GameOver.png")
     bgRect = bgImage.get_rect() 
