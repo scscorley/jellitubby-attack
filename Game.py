@@ -152,3 +152,4 @@ while True:
 		screen.fill(bgColor)
 		screen.blit(bgImage, bgRect)
 		pygame.display.flip()
+
