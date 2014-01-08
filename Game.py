@@ -1,4 +1,4 @@
-import pygame, sys, math, random
+ import pygame, sys, math, random
 
 pygame.init()
 
@@ -26,6 +26,7 @@ bgRect = bgImage.get_rect()
 bgColor = r,g,b = 0,0,0
 
 
+#FUCKTHEPOLICE
 
 
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
