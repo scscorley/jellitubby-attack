@@ -17,11 +17,17 @@ class Monster():
         self.speedx = speed[0]
         self.speedy = speed[1]
         self.speed = [self.speedx, self.speedy]
+        self.slowSpeedx = int(self.speedx/3)
+        self.slowSpeedy = int(self.speedy/3)
+        self.normalSpeedx = speed[0]
+        self.normalSpeedy = speed[1]
         self.radius = self.rect.width/2
         self.place(pos)
         self.living = True
         self.didBounce = False
         self.damage = 10
+        self.slowTimeMax = 60*10
+        self.slowTimer = self.slowTimeMax
         
     def place(self, pos):
         self.rect.center = pos
@@ -29,10 +35,24 @@ class Monster():
     def update(self):
         self.move()
         self.didBounce = False
+        print self.slowTimer, self.speed
+        if self.slowTimer < self.slowTimeMax:
+            if self.slowTimer > 0:
+                self.slowTimer -= 1
+            else:
+                self.slowTimer = self.slowTimeMax
+                self.speedx = self.normalSpeedx
+                self.speedy = self.normalSpeedy
         
     def move(self):
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed)
+    
+    def slowDown(self):
+        self.slowTimer = self.slowTimeMax-1
+        self.speedx = self.slowSpeedx
+        self.speedy = self.slowSpeedy
+            
         
     def collideWall(self, width, height):
         if self.rect.left < 0 or self.rect.right > width:
@@ -48,7 +68,7 @@ class Monster():
         if self.rect.center[1] < 0 or self.rect.center[1] > height:
             self.living = False
             
-    def collideBall(self, other):
+    def collideMonster(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
             if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
                 if self.radius + other.radius > self.distanceToPoint(other.rect.center):

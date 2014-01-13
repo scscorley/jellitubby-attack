@@ -6,6 +6,7 @@ from Monster import Monster
 from Vacuum import Vacuum
 from Bullet import Bullet
 from HealthBar import HB
+from Slow_Time import SlowTime
 clock = pygame.time.Clock()
 
 
@@ -18,21 +19,25 @@ height = 700
 size = width, height
 KILLS = 0
 
+
 screen = pygame.display.set_mode(size)
+
+bgImage = pygame.image.load("Resources/Background/start.png")
+bgRect = bgImage.get_rect()
 
 bgColor = r,g,b = 0,0,0
 
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
 healthbar = HB(vacuum)
 bullets = []
+powerUps = []
 
 font = pygame.font.Font(None, 36)
 
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
               [random.randint(75, width-75), random.randint(75, height-75)])]
               
-
-start = True
+start = False
 while True:
     while not start:
         for event in pygame.event.get():
@@ -83,47 +88,51 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
-                    
+               
+        if random.randint(0,1000) == 0:      #1 in 60 chance
+            powerUps += [SlowTime([width/2+20, height/2+65])]
+        for powerUp in powerUps:
+            powerUp.update()
+            if vacuum.collidePowerUp(powerUp):
+                if powerUp.type == "slow time":
+                    for monster in monsters:
+                        monster.slowDown()
+            if not powerUp.living:
+                powerUps.remove(powerUp)
         
         for monster in monsters:
             monster.update()
-        vacuum.update() 
-        healthbar.update()
-        
-        for monster in monsters:
             monster.collideWall(width, height)
-        vacuum.collideWall(width, height)
-        
+            vacuum.collideMonster(monster)
+            if not monster.living:
+                monsters.remove(monster)
         if len(monsters) > 1:
             for first in range(len(monsters)-1):
                 for second in range(first+1,len(monsters)):
-                    monsters[first].collideBall(monsters[second])
-        
-        for monster in monsters:
-            vacuum.collideBall(monster)
+                    monsters[first].collideMonster(monsters[second])
             
-        for bullet in bullets:
-            for monster in monsters:
-                bullet.collideBall(monster)
-            
-        for monster in monsters:
-            if not monster.living:
-                monsters.remove(monster)
-        
         for bullet in bullets:
             bullet.update()
             bullet.collideWall(width,height)
+            for monster in monsters:
+                bullet.collideMonster(monster)
             if not bullet.living:
                 bullets.remove(bullet)
                 
+        vacuum.update() 
+        vacuum.collideWall(width, height)
+        
+        healthbar.update()
         
         if len(monsters) == 0:
             level += 1
             text = font.render("Level " + str(level), 1, (250, 250, 250))
             textpos = text.get_rect(centerx=screen.get_width()/2)
             for i in range(level):
+                monSize = [50, 50]
                 monsters += [Monster( 
                               [random.randint(-5,5), random.randint(-5,5)], 
+                               
                               [random.randint(75, width-75), random.randint(75, height-75)])]
                               
         if len(monsters) == 0 and level > 0:
@@ -133,6 +142,8 @@ while True:
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
+        for powerUp in powerUps:
+            screen.blit(powerUp.image, powerUp.rect)
         for bullet in bullets:
             screen.blit(bullet.image, bullet.rect)
         screen.blit(vacuum.image, vacuum.rect)
@@ -141,6 +152,8 @@ while True:
             screen.blit(monster.image, monster.rect)
         pygame.display.flip()
         clock.tick(60)
+        #print level
+
     
     bgImage = pygame.image.load("Resources/Background/GameOver.png")
     bgRect = bgImage.get_rect() 
@@ -160,4 +173,6 @@ while True:
                     
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
+        for powerUp in powerUps:
+            screen.blit(powerUp.image, powerUp.rect)
         pygame.display.flip()
