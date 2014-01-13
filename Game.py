@@ -38,12 +38,9 @@ powerUps = []
 
 
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
-			  [random.randint(75, width-75), random.randint(75, height-75)])]
-			  
-start = False
-while True:
+              [random.randint(75, width-75), random.randint(75, height-75)])]
               
-start = True
+start = False
 while True:
     while not start:
         for event in pygame.event.get():
@@ -89,7 +86,7 @@ while True:
                 if event.button == 1:
                     bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
                
-        if random.randint(0,10000) == 0:      #1 in 60 chance
+        if random.randint(0,1000) == 0:      #1 in 60 chance
             powerUps += [SlowTime([width/2+20, height/2+65])]
         for powerUp in powerUps:
             powerUp.update()
