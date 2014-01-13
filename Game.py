@@ -9,9 +9,9 @@ from HealthBar import HB
 clock = pygame.time.Clock()
 
 
-pygame.mixer.music.load('Resources\Sounds\Music\monster.mp3')
-pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-pygame.mixer.music.play(-1)
+#pygame.mixer.music.load()
+#pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
+#pygame.mixer.music.play(-1)
 
 width = 1100
 height = 700
@@ -22,17 +22,16 @@ screen = pygame.display.set_mode(size)
 
 bgColor = r,g,b = 0,0,0
 
-
-
-
 vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
 healthbar = HB(vacuum)
 bullets = []
 
+font = pygame.font.Font(None, 36)
 
 monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
               [random.randint(75, width-75), random.randint(75, height-75)])]
               
+
 start = True
 while True:
     while not start:
@@ -46,10 +45,16 @@ while True:
         screen.blit(bgImage, bgRect)
         pygame.display.flip()
         clock.tick(60)
+    
+    pygame.font.init()
+    pygame.display.set_caption("Jellitubby Attack")
+    
 
     level = 1
     bgImage = pygame.image.load("Resources/Background/TOILET1.png")
     bgRect = bgImage.get_rect()
+    text = font.render("Level " + str(level), 1, (250, 0, 0))
+    textpos = text.get_rect(centerx=screen.get_width()/2)
     
     while start and vacuum.living:
         for event in pygame.event.get():
@@ -78,8 +83,8 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
-               
-
+                    
+        
         for monster in monsters:
             monster.update()
         vacuum.update() 
@@ -114,13 +119,20 @@ while True:
         
         if len(monsters) == 0:
             level += 1
+            text = font.render("Level " + str(level), 1, (250, 250, 250))
+            textpos = text.get_rect(centerx=screen.get_width()/2)
             for i in range(level):
                 monsters += [Monster( 
                               [random.randint(-5,5), random.randint(-5,5)], 
                               [random.randint(75, width-75), random.randint(75, height-75)])]
+                              
+        if len(monsters) == 0 and level > 0:
+            bgImage = pygame.image.load("Resources/Background/TOILET1.png")
+            bgRect = bgImage.get_rect()
         
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
+        screen.blit(text, textpos)
         for bullet in bullets:
             screen.blit(bullet.image, bullet.rect)
         screen.blit(vacuum.image, vacuum.rect)
