@@ -24,7 +24,7 @@ class Bullet():
         self.speed = [self.speedx, self.speedy]
         self.rect = self.rect.move(self.speed)
     
-    def collideBall(self, other):
+    def collideMonster(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
             if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
                 if self.radius + other.radius > self.distanceToPoint(other.rect.center):
