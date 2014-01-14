@@ -10,13 +10,10 @@ class HB():
 		self.image = pygame.image.load(self.path + str(life) + ".png")
 		self.rect = self.image.get_rect()
 		self.place(pos)
-		
-		
-		
+				
 	def place(self, pos):
 		self.rect.center = pos
-		
-		
+
 	def update(self):
 		life = int(math.ceil(self.owner.health/10.0)*10)
 		if life <= 0:
