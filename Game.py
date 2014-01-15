@@ -10,14 +10,10 @@ from Slow_Time import SlowTime
 clock = pygame.time.Clock()
 
 
-#pygame.mixer.music.load()
-#pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
-#pygame.mixer.music.play(-1)
-
-width = 1100
-height = 700
+width = 1200
+height = 675
 size = width, height
-KILLS = 0
+killCount = 0
 
 
 screen = pygame.display.set_mode(size)
@@ -51,14 +47,13 @@ while True:
         pygame.display.flip()
         clock.tick(60)
     
-    pygame.font.init()
     pygame.display.set_caption("Jellitubby Attack")
     
 
     level = 1
     bgImage = pygame.image.load("Resources/Background/TOILET1.png")
     bgRect = bgImage.get_rect()
-    text = font.render("Level " + str(level), 1, (250, 0, 0))
+    text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
     
     while start and vacuum.living:
@@ -106,6 +101,7 @@ while True:
             vacuum.collideMonster(monster)
             if not monster.living:
                 monsters.remove(monster)
+                killCount += 1
         if len(monsters) > 1:
             for first in range(len(monsters)-1):
                 for second in range(first+1,len(monsters)):
@@ -155,8 +151,11 @@ while True:
         #print level
 
     
-    bgImage = pygame.image.load("Resources/Background/GameOver.png")
-    bgRect = bgImage.get_rect() 
+    bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
+    bgRect = bgImage.get_rect()
+    font = pygame.font.Font(None, 36)
+    text = font.render("Jellies Killed: " + str(killCount), 1, (250, 250, 250))
+    textpos = text.get_rect(centerx=screen.get_width()/2)
     
     while start and not vacuum.living:
         for event in pygame.event.get():
