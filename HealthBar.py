@@ -1,6 +1,7 @@
 import pygame, sys, math
 
 from Vacuum import Vacuum
+from Boss import Boss
 
 class HB():
 	def __init__(self, owner, pos = (250, 250), path = "Resources/Health Bar/"):
