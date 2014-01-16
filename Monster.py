@@ -35,7 +35,6 @@ class Monster():
     def update(self):
         self.move()
         self.didBounce = False
-        print self.slowTimer, self.speed
         if self.slowTimer < self.slowTimeMax:
             if self.slowTimer > 0:
                 self.slowTimer -= 1

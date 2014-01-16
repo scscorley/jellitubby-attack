@@ -14,10 +14,10 @@ clock = pygame.time.Clock()
 #pygame.mixer.music.set_endevent(pygame.constants.USEREVENT)
 #pygame.mixer.music.play(-1)
 
-width = 1100
-height = 700
+width = 1200
+height = 675
 size = width, height
-KILLS = 0
+killCount = 0
 pause = False
 
 altFlag = False
