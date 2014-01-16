@@ -52,7 +52,13 @@ class Monster():
         self.speedx = self.slowSpeedx
         self.speedy = self.slowSpeedy
             
-        
+    def collideVacuum(self, other):
+        if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
+            if self.rect.bottom > other.rect.top and self.rect.top < other.rect.bottom:
+                if self.radius + other.radius > self.distanceToPoint(other.rect.center):
+                    return True
+        return False
+    
     def collideWall(self, width, height):
         if self.rect.left < 0 or self.rect.right > width:
             if not self.didBounce:
