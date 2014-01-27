@@ -53,7 +53,7 @@ while True:
     
 
     level = 1
-    bgImage = pygame.image.load("Resources/Background/TOILET1.png")
+    bgImage = pygame.image.load("Resources/Background/newToilet.png")
     bgRect = bgImage.get_rect()
     text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
@@ -152,15 +152,7 @@ while True:
         clock.tick(60)
         #print level
 
-    bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
-    bgRect = bgImage.get_rect()
-    font = pygame.font.Font(None, 36)
-    text = font.render("Jellies Killed: " + str(killCount), 1, (250, 250, 250))
-    textpos = text.get_rect(centerx=screen.get_width()/2)
 
-    
-    bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
-    bgRect = bgImage.get_rect() 
     
     while start and not vacuum.living:
         for event in pygame.event.get():
@@ -174,9 +166,14 @@ while True:
                     bullets = []
                     monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
                                 [random.randint(75, width-75), random.randint(75, height-75)])]
-                    
+        
+        print killCount
+        bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
+        bgRect = bgImage.get_rect()
+        font = pygame.font.Font(None, 50)
+        text = font.render("Jellies Killed: " + str(killCount), 1, (250, 0, 250))
+        textpos = text.get_rect(centerx=screen.get_width()/2, centery=230)           
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
-        for powerUp in powerUps:
-            screen.blit(powerUp.image, powerUp.rect)
+        screen.blit(text, textpos) 
         pygame.display.flip()
