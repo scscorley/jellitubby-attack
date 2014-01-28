@@ -143,7 +143,7 @@ while True:
                 
                
         if random.randint(0,1000) == 0:      #1 in 60 chance
-            powerUps += [SlowTime([width/2+20, height/2+65])]
+            powerUps += [SlowTime([width/2-10, height/2+65])]
         for powerUp in powerUps:
             powerUp.update()
             if vacuum.collidePowerUp(powerUp):
