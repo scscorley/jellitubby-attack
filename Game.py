@@ -68,16 +68,11 @@ while True:
     
 
     level = 1
-    bgImage = pygame.image.load("Resources/Background/newToilet3.png")
+    bgImage = pygame.image.load("Resources/Background/newToilet5.png")
     bgRect = bgImage.get_rect()
     text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
     
-   
-     
-          
-                
-              
     
     while start and vacuum.living:
         for event in pygame.event.get():
