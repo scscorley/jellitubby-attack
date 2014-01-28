@@ -10,8 +10,8 @@ from Slow_Time import SlowTime
 clock = pygame.time.Clock()
 
 
-width = 1200
-height = 675
+width = 1024
+height = 652
 size = width, height
 killCount = 0
 pause = False
