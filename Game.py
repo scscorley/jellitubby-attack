@@ -68,9 +68,9 @@ while True:
     
 
     level = 1
-    bgImage = pygame.image.load("Resources/Background/newToilet.png")
+    bgImage = pygame.image.load("Resources/Background/newToilet3.png")
     bgRect = bgImage.get_rect()
-    text = font.render("Level " + str(level), 1, (250, 0, 0))
+    text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
     
    
@@ -159,6 +159,7 @@ while True:
             vacuum.collideMonster(monster)
             if not monster.living:
                 monsters.remove(monster)
+                killCount += 1
         if len(monsters) > 1:
             for first in range(len(monsters)-1):
                 for second in range(first+1,len(monsters)):
@@ -191,10 +192,11 @@ while True:
                     onPlayer = newMonster.collideVacuum(vacuum)
                 monsters += [newMonster]
                               
+        """
         if len(monsters) == 0 and level > 0:
             bgImage = pygame.image.load("Resources/Background/TOILET1.png")
             bgRect = bgImage.get_rect()
-        
+        """
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
@@ -208,6 +210,7 @@ while True:
             screen.blit(monster.image, monster.rect)
         pygame.display.flip()
         clock.tick(60)
+        print clock.get_fps()
         #print level
 
 
@@ -225,7 +228,7 @@ while True:
                     monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
                                 [random.randint(75, width-75), random.randint(75, height-75)])]
         
-        print killCount
+
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
         bgRect = bgImage.get_rect()
         font = pygame.font.Font(None, 50)
@@ -233,6 +236,5 @@ while True:
         textpos = text.get_rect(centerx=screen.get_width()/2, centery=230)           
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
-        screen.blit(powerUp.image, powerUp.rect)
         screen.blit(text, textpos)
         pygame.display.flip()
