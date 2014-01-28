@@ -47,7 +47,7 @@ while True:
                     start = True
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                         altFlag = True
-                if (event.key == pygame.K_RSHIFT) and altFlag:
+                if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
                     if fullscreen == 0:
                         fullscreen = pygame.FULLSCREEN
                     else:
@@ -89,7 +89,7 @@ while True:
                     vacuum.direction("down")
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                         altFlag = True
-                if (event.key == pygame.K_RSHIFT) and altFlag:
+                if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
                     if fullscreen == 0:
                         fullscreen = pygame.FULLSCREEN
                     else:
