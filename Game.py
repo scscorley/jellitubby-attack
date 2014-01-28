@@ -138,7 +138,7 @@ while True:
                 
                
         if random.randint(0,1000) == 0:      #1 in 60 chance
-            powerUps += [SlowTime([width/2+20, height/2+65])]
+            powerUps += [SlowTime([width/2, height/2+65])]
         for powerUp in powerUps:
             powerUp.update()
             if vacuum.collidePowerUp(powerUp):
@@ -222,6 +222,18 @@ while True:
                     bullets = []
                     monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
                                 [random.randint(75, width-75), random.randint(75, height-75)])]
+                if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
+                        altFlag = True
+                if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
+                    if fullscreen == 0:
+                        fullscreen = pygame.FULLSCREEN
+                    else:
+                        fullscreen = 0
+                    screen = pygame.display.set_mode((width,height),fullscreen)
+                    pygame.display.flip()
+            if event.type == pygame.KEYUP:
+                if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
+                   altFlag = False
         
 
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
