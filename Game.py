@@ -1,4 +1,4 @@
-import pygame, sys, math, random
+import pygame, sys, math, random, open
 
 pygame.init()
 
@@ -235,6 +235,8 @@ while True:
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                    altFlag = False
         
+        
+       
 
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
         bgRect = bgImage.get_rect()
