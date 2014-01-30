@@ -51,6 +51,8 @@ class Monster():
         self.slowTimer = self.slowTimeMax-1
         self.speedx = self.slowSpeedx
         self.speedy = self.slowSpeedy
+    
+        
             
     def collideVacuum(self, other):
         if self.rect.right > other.rect.left and self.rect.left < other.rect.right:
