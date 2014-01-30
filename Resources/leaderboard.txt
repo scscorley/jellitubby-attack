@@ -1,0 +1,5 @@
+JCN 98
+SPC 85
+IDN 35
+EIN 9
+DCD 1

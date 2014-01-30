@@ -1,4 +1,4 @@
-import pygame, sys, math, random, open
+import pygame, sys, math, random
 
 pygame.init()
 
@@ -205,7 +205,7 @@ while True:
             screen.blit(monster.image, monster.rect)
         pygame.display.flip()
         clock.tick(60)
-        print clock.get_fps()
+        #print clock.get_fps()
         #print level
 
 
@@ -235,15 +235,35 @@ while True:
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                    altFlag = False
         
+        font = pygame.font.Font(None, 50)
         
-       
+        f = open("Resources/leaderboard.txt", "w")
+        lines = f.readlines()
+        f.close()
+        
+        
+        
+        print lines
+        
+        leaderboard = []
+        entryY = 300
+        for line in lines:
+            boardEntry = []
+            leaderText = font.render(line, 1, (250, 250, 250))
+            leaderTextPos = leaderText.get_rect(centerx=screen.get_width()/2, centery=entryY)
+            entryY += 30
+            boardEntry += [leaderText, leaderTextPos]
+            leaderboard += [boardEntry]
+
 
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
         bgRect = bgImage.get_rect()
         font = pygame.font.Font(None, 50)
         text = font.render("Jellies Killed: " + str(killCount), 1, (250, 0, 250))
-        textpos = text.get_rect(centerx=screen.get_width()/2, centery=230)           
+        textpos = text.get_rect(centerx=screen.get_width()/2, centery=230)  
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
+        for boardEntry in leaderboard:
+            screen.blit(boardEntry[0], boardEntry[1])
         pygame.display.flip()
