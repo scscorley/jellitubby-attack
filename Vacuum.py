@@ -14,6 +14,7 @@ class Vacuum():
 		self.place(pos)
 		self.didBounce = False
 		self.health = 100
+		self.maxHealth = 100
 		mousePos = pygame.mouse.get_pos()
 		mousePosPlayerX = mousePos[0] - self.rect.center[0]
 		mousePosPlayerY = mousePos[1] - self.rect.center[1]

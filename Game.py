@@ -1,4 +1,4 @@
-import pygame, sys, math, random, open
+import pygame, sys, math, random
 
 pygame.init()
 
@@ -7,6 +7,7 @@ from Vacuum import Vacuum
 from Bullet import Bullet
 from HealthBar import HB
 from Slow_Time import SlowTime
+from heart import Heart
 clock = pygame.time.Clock()
 
 
@@ -138,13 +139,18 @@ while True:
                 
                
         if random.randint(0,1000) == 0:      #1 in 60 chance
-            powerUps += [SlowTime([width/2, height/2+65])]
+            powerUps += [SlowTime([width/2, height/2+65])] 
+        if random.randint(0,1000) == 0:
+            powerUps += [Heart([width/2, height/2])]
+        
         for powerUp in powerUps:
             powerUp.update()
             if vacuum.collidePowerUp(powerUp):
                 if powerUp.type == "slow time":
                     for monster in monsters:
                         monster.slowDown()
+                if powerUp.type == "heart":
+                    healthbar.heal()
             if not powerUp.living:
                 powerUps.remove(powerUp)
         
