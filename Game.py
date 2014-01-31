@@ -8,6 +8,9 @@ from Bullet import Bullet
 from HealthBar import HB
 from Slow_Time import SlowTime
 from heart import Heart
+from nuke import Nuke
+from pierce import Pierce
+from PiercingBullet import PiercingBullet
 clock = pygame.time.Clock()
 
 
@@ -16,6 +19,7 @@ height = 652
 size = width, height
 killCount = 0
 pause = False
+nukeCount = 0
 
 altFlag = False
 fullscreen = 0
@@ -74,6 +78,8 @@ while True:
     text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
     
+    piercing = False
+    
     
     while start and vacuum.living:
         for event in pygame.event.get():
@@ -90,6 +96,11 @@ while True:
                     vacuum.direction("down")
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                         altFlag = True
+                if event.key == pygame.K_SPACE:
+                    if nukeCount > 0:
+                        nukeCount -= 1
+                        for monster in monsters:
+                            monster.living = False
                 if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
                     if fullscreen == 0:
                         fullscreen = pygame.FULLSCREEN
@@ -135,13 +146,20 @@ while True:
                 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
+                    if piercing:
+                        bullets += [PiercingBullet(vacuum.rect.center, vacuum.angle)]
+                    else:
+                        bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
                 
                
         if random.randint(0,1000) == 0:      #1 in 60 chance
             powerUps += [SlowTime([width/2, height/2+65])] 
         if random.randint(0,1000) == 0:
             powerUps += [Heart([width/2, height/2])]
+        if random.randint(0,1000) == 0:
+            powerUps += [Nuke([width/2, height/2+130])]
+        if random.randint(0,1000) == 0:
+            powerUps += [Pierce([width/2+65, height/2+65])]
         
         for powerUp in powerUps:
             powerUp.update()
@@ -151,9 +169,13 @@ while True:
                         monster.slowDown()
                 if powerUp.type == "heart":
                     healthbar.heal()
+                if powerUp.type == "nuke":
+                    nukeCount += 1
+                if powerUp.type == "pierce":
+                    piercing = True
             if not powerUp.living:
-                powerUps.remove(powerUp)
-        
+                powerUps.remove(powerUp)                
+            
         for monster in monsters:
             monster.update()
             monster.collideWall(width, height)
@@ -213,7 +235,7 @@ while True:
         clock.tick(60)
         #print clock.get_fps()
         #print level
-
+       
 
     
     while start and not vacuum.living:
@@ -272,3 +294,4 @@ while True:
         for boardEntry in leaderboard:
             screen.blit(boardEntry[0], boardEntry[1])
         pygame.display.flip()
+
