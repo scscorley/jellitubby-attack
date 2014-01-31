@@ -241,21 +241,20 @@ while True:
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                    altFlag = False
         
-        font = pygame.font.Font(None, 50)
+        leaderFont = pygame.font.Font(None, 50)
+        leaderTitle = leaderFont.render("Highscores", 1, (250, 250, 250))
+        leaderTitlePos = leaderTitle.get_rect(centerx=screen.get_width()/2, centery=300)
+        leaderFont = pygame.font.Font(None, 30)
         
-        f = open("Resources/leaderboard.txt", "w")
+        f = open("Resources/leaderboard.txt", "r")
         lines = f.readlines()
         f.close()
         
-        
-        
-        print lines
-        
         leaderboard = []
-        entryY = 300
+        entryY = 360
         for line in lines:
             boardEntry = []
-            leaderText = font.render(line, 1, (250, 250, 250))
+            leaderText = leaderFont.render(line, 1, (250, 250, 250))
             leaderTextPos = leaderText.get_rect(centerx=screen.get_width()/2, centery=entryY)
             entryY += 30
             boardEntry += [leaderText, leaderTextPos]
