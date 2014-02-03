@@ -80,7 +80,7 @@ while True:
     
     piercing = False
     piercingTimer = 0
-    piercingMaxTimer = 60 * 10
+    piercingMaxTimer = 60 * 15
     
     
     while start and vacuum.living:
