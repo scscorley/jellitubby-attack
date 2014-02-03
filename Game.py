@@ -79,6 +79,8 @@ while True:
     textpos = text.get_rect(centerx=screen.get_width()/2)
     
     piercing = False
+    piercingTimer = 0
+    piercingMaxTimer = 60 * 10
     
     
     while start and vacuum.living:
@@ -158,7 +160,7 @@ while True:
             powerUps += [Heart([width/2, height/2])]
         if random.randint(0,1000) == 0:
             powerUps += [Nuke([width/2, height/2+130])]
-        if random.randint(0,1000) == 0:
+        if random.randint(0,10) == 0:
             powerUps += [Pierce([width/2+65, height/2+65])]
         
         for powerUp in powerUps:
@@ -173,8 +175,19 @@ while True:
                     nukeCount += 1
                 if powerUp.type == "pierce":
                     piercing = True
+                    piercingTimer = piercingMaxTimer
             if not powerUp.living:
-                powerUps.remove(powerUp)                
+                powerUps.remove(powerUp)  
+        
+        if piercingTimer > 1:
+            piercingTimer -= 1
+        elif piercingTimer == 1:
+            piercing = False
+            piercingTimer -= 1
+            
+        
+
+            
             
         for monster in monsters:
             monster.update()

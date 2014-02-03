@@ -31,7 +31,7 @@ class Boss():
     def update(self):
         self.move()
         if self.health <= 0:
-			self.living = False
+            self.living = False
         self.didBounce = False
         print self.slowTimer, self.speed
         if self.slowTimer < self.slowTimeMax:
