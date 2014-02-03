@@ -160,7 +160,7 @@ while True:
             powerUps += [Heart([width/2, height/2])]
         if random.randint(0,1000) == 0:
             powerUps += [Nuke([width/2, height/2+130])]
-        if random.randint(0,10) == 0:
+        if random.randint(0,1000) == 0:
             powerUps += [Pierce([width/2+65, height/2+65])]
         
         for powerUp in powerUps:
