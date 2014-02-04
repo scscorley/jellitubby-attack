@@ -119,6 +119,13 @@ while True:
                             if event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_p:
                                     pause = False
+                                if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
+                                    if fullscreen == 0:
+                                        fullscreen = pygame.FULLSCREEN
+                                    else:
+                                        fullscreen = 0
+                                    screen = pygame.display.set_mode((width,height),fullscreen)
+                                    pygame.display.flip()
                                     
                         screen.fill(bgColor)
                         screen.blit(bgImage, bgRect)
