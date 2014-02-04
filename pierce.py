@@ -4,7 +4,7 @@ class Pierce():
     def __init__(self, pos = (0,0)):
         self.type = "pierce"
         self.image = pygame.image.load("Resources/powerUps/pierce.png")
-        self.image = pygame.transform.scale(self.image, [24,49])
+        self.image = pygame.transform.scale(self.image, [49,49])
         self.rect = self.image.get_rect()
         self.radius = self.rect.width/2
         self.place(pos)

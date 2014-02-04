@@ -80,6 +80,8 @@ while True:
 
     
     piercing = False
+    piercingTimer = 0
+    piercingMaxTimer = 60 * 15
     
     
     while start and vacuum.living:
@@ -187,8 +189,19 @@ while True:
                     nukeCount += 1
                 if powerUp.type == "pierce":
                     piercing = True
+                    piercingTimer = piercingMaxTimer
             if not powerUp.living:
-                powerUps.remove(powerUp)                
+                powerUps.remove(powerUp)  
+        
+        if piercingTimer > 1:
+            piercingTimer -= 1
+        elif piercingTimer == 1:
+            piercing = False
+            piercingTimer -= 1
+            
+        
+
+            
             
         for monster in monsters:
             monster.update()
