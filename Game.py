@@ -77,6 +77,7 @@ while True:
     bgRect = bgImage.get_rect()
     text = font.render("Level " + str(level), 1, (250, 250, 250))
     textpos = text.get_rect(centerx=screen.get_width()/2)
+
     
     piercing = False
     
@@ -117,6 +118,17 @@ while True:
                             if event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_p:
                                     pause = False
+                                if (event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and altFlag:
+                                    if fullscreen == 0:
+                                        fullscreen = pygame.FULLSCREEN
+                                    else:
+                                        fullscreen = 0
+                                    screen = pygame.display.set_mode((width,height),fullscreen)
+                                    pygame.display.flip()
+                        
+                        pauseFont = pygame.font.Font(None, 72)
+                        pauseText = pauseFont.render("Paused", 1, (0,0,0))
+                        pauseTextPos = pauseText.get_rect(centerx=width/2, centery=height/2)
                                     
                         screen.fill(bgColor)
                         screen.blit(bgImage, bgRect)
@@ -129,6 +141,8 @@ while True:
                         screen.blit(healthbar.image, healthbar.rect)
                         for monster in monsters:
                             screen.blit(monster.image, monster.rect)
+                        screen.blit(nukeText, nukeTextPos)
+                        screen.blit(pauseText, pauseTextPos)
                         pygame.display.flip()
                         clock.tick(60)
             if event.type == pygame.KEYUP:
@@ -214,12 +228,11 @@ while True:
                               [random.randint(75, width-75), random.randint(75, height-75)])
                     onPlayer = newMonster.collideVacuum(vacuum)
                 monsters += [newMonster]
+                
+            
+        nukeText = font.render("Nukes: " + str(nukeCount), 1, (250, 250, 250))
+        nukeTextPos = nukeText.get_rect(centerx=280)
                               
-        """
-        if len(monsters) == 0 and level > 0:
-            bgImage = pygame.image.load("Resources/Background/TOILET1.png")
-            bgRect = bgImage.get_rect()
-        """
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
@@ -231,6 +244,7 @@ while True:
         screen.blit(healthbar.image, healthbar.rect)
         for monster in monsters:
             screen.blit(monster.image, monster.rect)
+        screen.blit(nukeText, nukeTextPos)
         pygame.display.flip()
         clock.tick(60)
         #print clock.get_fps()
@@ -272,6 +286,8 @@ while True:
         lines = f.readlines()
         f.close()
         
+        
+        
         leaderboard = []
         entryY = 360
         for line in lines:
@@ -291,6 +307,7 @@ while True:
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
+        screen.blit(leaderTitle, leaderTitlePos)
         for boardEntry in leaderboard:
             screen.blit(boardEntry[0], boardEntry[1])
         pygame.display.flip()
