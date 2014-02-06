@@ -5,7 +5,7 @@ from Vacuum import Vacuum
 class SuperVacuum(Vacuum):
     def __init__(self, speed = [2,2], size = [100,100], pos = (0,0)):
         Vacuum.__init__(self, speed, size, pos)
-        self.baseImage = pygame.image.load("Resources/Player/Vacuum.png")
+        self.baseImage = pygame.image.load("Resources/Player/superVacuum.png")
         self.baseImage = pygame.transform.scale(self.baseImage, size)
         rot_image = pygame.transform.rotate(self.baseImage, self.angle)
         rot_rect = self.rect.copy()
