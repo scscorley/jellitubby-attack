@@ -295,7 +295,7 @@ while True:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     start = True
-                    vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
+                    vacuum = Vacuum([3,3], [100,100], [width/2,height/2])
                     healthbar = HB(vacuum)
                     bullets = []
                     monsters = [Monster([random.randint(-5,5), random.randint(-5,5)], 
