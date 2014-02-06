@@ -11,6 +11,8 @@ from heart import Heart
 from nuke import Nuke
 from pierce import Pierce
 from PiercingBullet import PiercingBullet
+from supervacuum import SuperVacuum
+from superman import Superman
 clock = pygame.time.Clock()
 
 
@@ -31,7 +33,7 @@ bgRect = bgImage.get_rect()
 
 bgColor = r,g,b = 0,0,0
 
-vacuum = Vacuum(["Resources/Player/Vacuum.png"], [3,3], [100,100], [width/2,height/2])
+vacuum = Vacuum([3,3], [100,100], [width/2,height/2])
 healthbar = HB(vacuum)
 bullets = []
 powerUps = []
@@ -82,6 +84,10 @@ while True:
     piercing = False
     piercingTimer = 0
     piercingMaxTimer = 60 * 15
+    
+    supermode = False
+    supermodeTimer = 0
+    supermodeMaxTimer = 60 * 15
     
     
     while start and vacuum.living:
@@ -166,6 +172,9 @@ while True:
                         bullets += [PiercingBullet(vacuum.rect.center, vacuum.angle)]
                     else:
                         bullets += [Bullet(vacuum.rect.center, vacuum.angle)]
+
+          
+                    
                 
                
         if random.randint(0,1000) == 0:      #1 in 60 chance
@@ -176,6 +185,8 @@ while True:
             powerUps += [Nuke([width/2, height/2+130])]
         if random.randint(0,1000) == 0:
             powerUps += [Pierce([width/2+65, height/2+65])]
+        if random.randint(0,10) == 0:
+            powerUps += [Superman([width/2-65, height/2+65])]
         
         for powerUp in powerUps:
             powerUp.update()
@@ -190,6 +201,10 @@ while True:
                 if powerUp.type == "pierce":
                     piercing = True
                     piercingTimer = piercingMaxTimer
+                if powerUp.type == "superman":
+                    supermode = True
+                    supermodeTimer = supermodeMaxTimer
+                    vacuum = SuperVacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
             if not powerUp.living:
                 powerUps.remove(powerUp)  
         
@@ -198,6 +213,14 @@ while True:
         elif piercingTimer == 1:
             piercing = False
             piercingTimer -= 1
+            
+            
+        if supermodeTimer > 1:
+            supermodeTimer -= 1
+        elif supermodeTimer == 1:
+            supermode = False
+            supermodeTimer -= 1
+            vacuum = Vacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
             
         
 
