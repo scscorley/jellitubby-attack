@@ -1,12 +1,13 @@
 import pygame, sys, math
 
 class Vacuum():
-    def __init__(self, image, speed = [2,2], size = [100,100], pos = (0,0)):
+    def __init__(self, speed = [2,2], size = [100,100], pos = (0,0)):
         self.baseImage = pygame.image.load("Resources/Player/Vacuum.png")
         self.baseImage = pygame.transform.scale(self.baseImage, size)
         self.rect = self.baseImage.get_rect()
         self.maxSpeedx = speed[0]
         self.maxSpeedy = speed[1]
+        self.maxSpeed = [self.maxSpeedx, self.maxSpeedy]
         self.speedx = 0
         self.speedy = 0
         self.speed = [self.speedx, self.speedy]
