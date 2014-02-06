@@ -290,27 +290,18 @@ while True:
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                    altFlag = False
         
-        leaderFont = pygame.font.Font(None, 50)
-        leaderTitle = leaderFont.render("Highscores", 1, (250, 250, 250))
-        leaderTitlePos = leaderTitle.get_rect(centerx=screen.get_width()/2, centery=300)
-        leaderFont = pygame.font.Font(None, 30)
         
-        f = open("Resources/leaderboard.txt", "r")
-        lines = f.readlines()
-        f.close()
-        
-        
-        
-        leaderboard = []
-        entryY = 360
-        for line in lines:
-            boardEntry = []
-            leaderText = leaderFont.render(line, 1, (250, 250, 250))
-            leaderTextPos = leaderText.get_rect(centerx=screen.get_width()/2, centery=entryY)
-            entryY += 30
-            boardEntry += [leaderText, leaderTextPos]
-            leaderboard += [boardEntry]
+        levelFont = pygame.font.Font(None, 72)
+        if level < 6:
+            levelTitle = levelFont.render("Level " + str(level) + "", 1, (250, 250, 250))
+        elif level > 5 and  level < 26:
+            levelTitle = levelFont.render("Level " + str(level) + "", 1, (250, 250, 250))
+        elif level > 25 and level < 51:
+            levelTitle = levelFont.render("Level " + str(level) + "", 1, (250, 250, 250))
+        elif level > 50:
+            levelTitle = levelFont.render("Level " + str(level) + "",  1, (250, 250, 250))
 
+        levelTitlePos = levelTitle.get_rect(centerx=screen.get_width()/2, centery=360)
 
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
         bgRect = bgImage.get_rect()
@@ -320,8 +311,6 @@ while True:
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
-        screen.blit(leaderTitle, leaderTitlePos)
-        for boardEntry in leaderboard:
-            screen.blit(boardEntry[0], boardEntry[1])
+        screen.blit(levelTitle, levelTitlePos)
         pygame.display.flip()
 
