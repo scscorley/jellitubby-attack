@@ -28,7 +28,7 @@ class HB():
         self.rect = self.image.get_rect()
     
     def heal(self):
-        self.owner.health += 10
+        self.owner.health += 20
         if self.owner.health > self.owner.maxHealth:
             self.owner.health = self.owner.maxHealth
 
