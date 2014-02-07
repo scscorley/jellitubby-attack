@@ -202,9 +202,11 @@ while True:
                     piercing = True
                     piercingTimer = piercingMaxTimer
                 if powerUp.type == "superman":
+                    oldHealth = healthbar.owner.health
                     supermode = True
                     supermodeTimer = supermodeMaxTimer
                     vacuum = SuperVacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
+                    
             if not powerUp.living:
                 powerUps.remove(powerUp)  
         
@@ -221,6 +223,7 @@ while True:
             supermode = False
             supermodeTimer -= 1
             vacuum = Vacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
+            healthbar.owner.health = oldHealth
             
         
 
