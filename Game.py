@@ -114,6 +114,7 @@ while True:
                 if (event.key == pygame.K_j) and h:
                     supermode = True
                     vacuum = SuperVacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
+                    piercing = True
                 if event.key == pygame.K_SPACE:
                     if nukeCount > 0:
                         nukeCount -= 1
