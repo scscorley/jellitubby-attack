@@ -177,15 +177,15 @@ while True:
                     
                 
                
-        if random.randint(0,10000) == 0:      #1 in 60 chance
+        if random.randint(0,7500) == 0:
             powerUps += [SlowTime([width/2, height/2+65])] 
-        if random.randint(0,10000) == 0:
+        if random.randint(0,7500) == 0:
             powerUps += [Heart([width/2, height/2])]
-        if random.randint(0,10000) == 0:
+        if random.randint(0,7500) == 0:
             powerUps += [Nuke([width/2, height/2+130])]
-        if random.randint(0,10000) == 0:
+        if random.randint(0,7500) == 0:
             powerUps += [Pierce([width/2+65, height/2+65])]
-        if random.randint(0,100000) == 0:
+        if random.randint(0,7500) == 0:
             powerUps += [Superman([width/2-65, height/2+65])]
         
         for powerUp in powerUps:
@@ -206,8 +206,7 @@ while True:
                     supermode = True
                     supermodeTimer = supermodeMaxTimer
                     vacuum = SuperVacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
-
-                    healthbar.setOwner(vacuum)
+                    
                   
                    
 
@@ -227,6 +226,7 @@ while True:
             supermode = False
             supermodeTimer -= 1
             vacuum = Vacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
+            healthbar.setOwner(vacuum)
             healthbar.owner.health = oldHealth
             
         
