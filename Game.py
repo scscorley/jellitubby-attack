@@ -330,8 +330,12 @@ while True:
             levelTitle = levelFont.render("Level " + str(level) + "", 1, (250, 250, 250))
         elif level > 50:
             levelTitle = levelFont.render("Level " + str(level) + "",  1, (250, 250, 250))
+        
+        youDiedFont = pygame.font.Font(None, 36)
+        youDied = youDiedFont.render("You died on", 1, (250, 250, 250))
+        youDiedPos = youDied.get_rect(centerx=screen.get_width()/2, centery=360)
 
-        levelTitlePos = levelTitle.get_rect(centerx=screen.get_width()/2, centery=360)
+        levelTitlePos = levelTitle.get_rect(centerx=screen.get_width()/2, centery=400)
 
         bgImage = pygame.image.load("Resources/Background/NewGameOver.png")
         bgRect = bgImage.get_rect()
@@ -341,6 +345,7 @@ while True:
         screen.fill(bgColor)
         screen.blit(bgImage, bgRect)
         screen.blit(text, textpos)
+        screen.blit(youDied, youDiedPos)
         screen.blit(levelTitle, levelTitlePos)
         pygame.display.flip()
 
