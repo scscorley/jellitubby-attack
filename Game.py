@@ -24,6 +24,8 @@ pause = False
 nukeCount = 0
 
 altFlag = False
+g = False
+h = False
 fullscreen = 0
 
 screen = pygame.display.set_mode(size)
@@ -105,6 +107,13 @@ while True:
                     vacuum.direction("down")
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                         altFlag = True
+                if event.key == pygame.K_g:
+                    g = True
+                if (event.key == pygame.K_h) and g:
+                    h = True
+                if (event.key == pygame.K_j) and h:
+                    supermode = True
+                    vacuum = SuperVacuum(vacuum.maxSpeed, [100,100], vacuum.rect.center)
                 if event.key == pygame.K_SPACE:
                     if nukeCount > 0:
                         nukeCount -= 1
@@ -164,6 +173,11 @@ while True:
                     vacuum.direction("stop down")
                 if (event.key == pygame.K_RALT or event.key == pygame.K_LALT):
                     altFlag = False
+                if event.key == pygame.K_g:
+                    g = False
+                if (event.key == pygame.K_h):
+                    h = False
+                
                 
                 
             if event.type == pygame.MOUSEBUTTONDOWN:
