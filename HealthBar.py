@@ -14,6 +14,9 @@ class HB():
                 
     def place(self, pos):
         self.rect.center = pos
+        
+    def setOwner(self, owner):
+        self.owner = owner
 
     def update(self):
         life = int(math.ceil(self.owner.health/10.0)*10)
